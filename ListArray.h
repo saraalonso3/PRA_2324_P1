@@ -32,14 +32,22 @@ class ListArray : public List<T> {
         	max = 0;
         	delete[] arr;
 	}
+
 	T operator[](int pos){
 		 if(pos<=0 || pos >=size()-1){
                         throw std::out_of_range("La posición no es válida");
                 }
                 return arr[pos];
 	}
-	friend std::ostream& operator<<(std::ostream &out, const ListArray<T> &list);
-    	void insert(int pos, T e) override {
+	
+	friend std::ostream& operator<<(std::ostream &out, const ListArray<T> &list){
+		for(int i = 0; i < list.n; i++){
+			out << list.arr[i] << std::endl;
+		}
+		return out;
+	}
+    	
+	void insert(int pos, T e) override {
 		if(pos<  0 || pos >= size()){
                 	throw std::out_of_range("La posicion no es valida");
         	}
@@ -76,12 +84,16 @@ class ListArray : public List<T> {
                 arr[0]= e;
                 n++;
 	}
+
 	T remove(int pos) override{
 		if(pos< 0 || pos >= size()-1){
                 	throw std::out_of_range("La posicion no es valida");
         	}
         	T x=arr[pos];
-
+		for (int i = pos; i < n-1; i++){
+			arr[i] = arr[i+1];
+		}
+		n--;
         	return x;
 	}
 	
