@@ -13,30 +13,47 @@ class ListLinked : public List<T> {
 		ListLinked(){
 			first = nullptr;
 			n = 0;
-	    }
-		~ListLinked(){
+		}
 
-	    }
+		~ListLinked(){
+			Node<T>* aux = first;
+			while (aux != nullptr){
+				Node<T>* eliminar = first;
+				first = first -> next;
+				aux = aux -> next;
+				delete eliminar;
+			}
+			first = nullptr;
+			n = 0;
+		}
 
 		T operator[](int pos){
-			if(pos <  0 || pos >= size()-1){
+			if(pos <  0 || pos > n-1){
                         	throw std::out_of_range("La posicion no es valida");
-                }
-
-
-	    }
+               		}
+			T elem = List[pos];
+			return elem;
+		}
 
 		friend std::ostream& operator<<(std::ostream &out, const ListLinked<T> &list){
-
-	    }
-	    //añadimos los métodos de List.h
+			Node<T>*aux = list.first;
+			while(aux != nullptr){
+				out << aux->data<< " ";
+				aux = aux -> next;
+			}
+			return out;
+		}
+	    
+		
+		//añadimos los métodos de List.h
 		void insert(int pos, T e) override final{
-			if(pos<  0 || pos >= size()){
+			if( pos < 0 || pos > n){
                         	throw std::out_of_range("La posicion no es valida");
                		 }
 			
 			if (pos == 0){
-				prepend(e);
+				first = new Node<T>(e,first);
+				n++;
 			}
 			else {
 				Node<T> * prev = first;
@@ -50,7 +67,7 @@ class ListLinked : public List<T> {
 					n++;
 				}
 			}
-	    }
+		}
 
 		void append(T e) override final {
 			Node<T>* aux = first;
@@ -66,11 +83,10 @@ class ListLinked : public List<T> {
 		void prepend(T e) override final {
 			 first= new Node<T>(e, first);
 			 n++;
-
-	    }
+		}
 
 		T remove(int pos) override final {
-			if(pos <  0 || pos >= size()-1){
+			if(pos <  0 || pos > n-1){
                                 throw std::out_of_range("La posicion no es valida");
                         }
 			Node<T>*prev = nullptr;
@@ -93,7 +109,7 @@ class ListLinked : public List<T> {
 		}
             
 		T get(int pos) override final {
-			if(pos <  0 || pos >= size()-1){
+			if(pos <  0 || pos > n-1){
                                 throw std::out_of_range("La posicion no es valida");
                		}
 			
@@ -105,7 +121,8 @@ class ListLinked : public List<T> {
 		 	}
 			T elem = aux->data;
 			return elem;			
-	    }
+		}
+
             	int search(T e) override final {
 			Node<T>*aux = first;
 			int i = 0;
@@ -119,14 +136,14 @@ class ListLinked : public List<T> {
 			else{
 				return -1;
 			}
-	    }
+		}
 
 		bool empty() override final {
 			return n==0;
-	    }
+		}
             
 		int size() override final {
 			return n;
-	    }
+		}
 
 };
