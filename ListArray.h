@@ -47,7 +47,7 @@ class ListArray : public List<T> {
 		return out;
 	}
     	
-	void insert(int pos, T e) override {
+	void insert(int pos, T e)override {
 		if(pos<  0 || pos >= size()){
                 	throw std::out_of_range("La posicion no es valida");
         	}
@@ -67,14 +67,14 @@ class ListArray : public List<T> {
         	arr[pos]= e;
         	n++;
 	}
-	void append(T e) override{
+	void append(T e)override{
 	      	 if(n == max){
                 	resize(2*max);
         	}
          	arr[n] = e;
          	n++;
 	}
-	void prepend(T e) override{
+	void prepend(T e)override{
 		if(n == max){
                 	resize(2*max);
         	}
@@ -85,7 +85,7 @@ class ListArray : public List<T> {
                 n++;
 	}
 
-	T remove(int pos) override{
+	T remove(int pos)override{
 		if(pos< 0 || pos >= size()-1){
                 	throw std::out_of_range("La posicion no es valida");
         	}
@@ -97,14 +97,14 @@ class ListArray : public List<T> {
         	return x;
 	}
 	
-	T get(int pos) override{
+	T get(int pos)override{
 		if(pos<= 0 || pos >= size()-1){
                 	throw std::out_of_range("La posicion no es valida");
         	}
         	T x=arr[pos];
         	return x;
 }
-	int search(T e) override{
+	int search(T e)override{
 		int pos = 0;
 		while (pos<=n){
                 	if(arr[pos]==e){
@@ -116,10 +116,10 @@ class ListArray : public List<T> {
         	}
         	return -1;
 	}
-	bool empty() override{
+	bool empty()override{
 		return n==0;
 	}
-	int size() override{
+	int size()override{
 		return n;
 	}
 
