@@ -31,14 +31,20 @@ class ListLinked : public List<T> {
 			if(pos <  0 || pos > n-1){
                         	throw std::out_of_range("La posicion no es valida");
                		}
-			T elem = List[pos];
-			return elem;
+			Node<T>*aux = first;
+                        int i = 0;
+                        while (aux != nullptr && i < pos){
+                                aux = aux -> next;
+                                i++;
+                        }
+                        T elem = aux->data;
+                        return elem;
 		}
 
 		friend std::ostream& operator<<(std::ostream &out, const ListLinked<T> &list){
 			Node<T>*aux = list.first;
 			while(aux != nullptr){
-				out << aux->data<< " ";
+				out << aux->data<< " "<<std::endl;
 				aux = aux -> next;
 			}
 			return out;
@@ -72,7 +78,7 @@ class ListLinked : public List<T> {
 		void append(T e) override final {
 			Node<T>* aux = first;
 			int i = 0;
-			while (aux != nullptr && i < n){
+			while (aux != nullptr && i < n-1){
 				aux = aux->next;
 				i++;
 			}
@@ -92,9 +98,10 @@ class ListLinked : public List<T> {
 			Node<T>*prev = nullptr;
 			Node<T>*aux = first;
 			int i = 0;
-			while (aux!= nullptr && i<pos-1){
+			while (aux!= nullptr && i<pos){
 				prev = aux;
-				aux = aux->next;;
+				aux = aux->next;
+				i++;
 			}
 			if (aux != nullptr){
 				if (aux == first){ //primera posicion
@@ -103,8 +110,10 @@ class ListLinked : public List<T> {
 				else {
 					prev->next = aux->next;
 				}
+				T elem = aux->data;
 				delete aux;
 				n--;
+				return elem;
 	    		}
 		}
             
@@ -115,7 +124,7 @@ class ListLinked : public List<T> {
 			
 			Node<T>*aux = first;
 			int i = 0;
-			while (aux != nullptr && i < pos-1){
+			while (aux != nullptr && i < pos){
 				aux = aux -> next;
 				i++;
 		 	}
