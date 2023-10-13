@@ -15,26 +15,23 @@ class ListArray : public List<T> {
         	for(int i = 0; i < max; i++){
                 	a[i] = arr[i];
         	}
-        	a = arr;
-        	arr = a;
-        	delete[] a;
+        	delete[] arr;
+		arr = a;
         	max = new_size;
 		}
 
     public:
         ListArray(){
-        	arr = new T[max];
-        	n = 1;
-        	max = 1;
-	}
-	~ListArray(){
+        	max = MINSIZE;
+		arr = new T[max];
         	n = 0;
-        	max = 0;
+	}
+	~ListArray(){;
         	delete[] arr;
 	}
 
 	T operator[](int pos){
-		 if(pos<=0 || pos >=size()-1){
+		 if(pos< 0 || pos >n-1){
                         throw std::out_of_range("La posición no es válida");
                 }
                 return arr[pos];
@@ -48,18 +45,11 @@ class ListArray : public List<T> {
 	}
     	
 	void insert(int pos, T e)override {
-		if(pos<  0 || pos >= size()){
+		if(pos < 0 || pos > n){
                 	throw std::out_of_range("La posicion no es valida");
         	}
         	if(n == max){
                 	resize(2*max);
-        	}
-        	if(pos == 0){
-                	prepend(e);
-        	}
-
-        	if(pos == n){
-                	append(e);
         	}
         	for(int i = n-1; i >= pos; i--){
                 	arr[i+1] = arr[i];
@@ -68,25 +58,14 @@ class ListArray : public List<T> {
         	n++;
 	}
 	void append(T e)override{
-	      	 if(n == max){
-                	resize(2*max);
-        	}
-         	arr[n] = e;
-         	n++;
+	      	insert(n,e);
 	}
 	void prepend(T e)override{
-		if(n == max){
-                	resize(2*max);
-        	}
-        	for(int i = n-1; i>0; i--){
-                	arr[i+1]= arr[i];
-        	}
-                arr[0]= e;
-                n++;
+		insert(0,e);
 	}
 
 	T remove(int pos)override{
-		if(pos< 0 || pos >= size()-1){
+		if(pos < 0 || pos > n-1){
                 	throw std::out_of_range("La posicion no es valida");
         	}
         	T x=arr[pos];
@@ -98,7 +77,7 @@ class ListArray : public List<T> {
 	}
 	
 	T get(int pos)override{
-		if(pos<= 0 || pos >= size()-1){
+		if(pos < 0 || pos > n-1){
                 	throw std::out_of_range("La posicion no es valida");
         	}
         	T x=arr[pos];
