@@ -33,6 +33,7 @@ int main(){
     std::cout << "l.remove(0) => " << r << ": " << std::endl; 
     std::cout << std::endl; 
 
+
     std::cout << list << std::endl; 
     std::cout << "size(): " << list.size() << std::endl; 
     std::cout << "empty(): " << list.empty() << std::endl; 

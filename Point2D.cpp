@@ -7,7 +7,7 @@ Point2D::Point2D(double x, double y){
 	this -> y = y;
 }
 
-double distance(const Point2D &a, const Point2D &b){  //calcula distancia euclidiana
+double Point2D::distance(const Point2D &a, const Point2D &b){  //calcula distancia euclidiana
         double restax = a.x - b.x;
         double restay = a.y - b.y;
         double cx = pow(restax, 2);
