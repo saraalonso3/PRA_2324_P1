@@ -60,20 +60,20 @@ void Rectangle::set_vertices(Point2D *vertices){
 }
 
 
-Point2D operator[](int ind) {
+Point2D Rectangle::operator[](int ind) {
 	if(ind < 0 || ind >N_VERTICES - 1){
                 throw std::out_of_range("El vértice no existe");
         }
         return vs[ind];
 }
 
-Rectangle& operator=(const Rectangle &r){
+Rectangle& Rectangle::operator=(const Rectangle &r){
 	color = r.color;
         Point2D* v = new Point2D[4];
         for (int i = 0; i < N_VERTICES; i++){
                 v[i] = r.vs[i];
         }
-	return r;
+	return *this;
 }
 
 std::ostream& operator<<(std::ostream &out, const Rectangle &r){
