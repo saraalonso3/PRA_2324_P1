@@ -18,7 +18,7 @@ bool Rectangle::check(Point2D* vertices){
 }
 
 Rectangle::Rectangle(){
-	color;
+	color = "red";
 	vs[0] = (-1,0.5);
 	vs[1] = (1,0.5);
 	vs[2] = (1,-0.5);
@@ -27,7 +27,16 @@ Rectangle::Rectangle(){
 
 Rectangle::Rectangle(std::string color, Point2D* vertices){
 	this->color = color;
-	check(vertices);
+	bool correcto = check(vertices);
+	if(correcto == true){
+	vs[0]= vertices[0];
+	vs[1]= vertices[1];
+	vs[2]= vertices[2];
+	vs[3]= vertices[3];
+	}
+	else{
+		throw std::invalid_argument("Los vértices no forman un rectángulo");
+	}
 }
 
 Rectangle::Rectangle(const Rectangle &r){
@@ -77,7 +86,7 @@ Rectangle& Rectangle::operator=(const Rectangle &r){
 }
 
 std::ostream& operator<<(std::ostream &out, const Rectangle &r){
-	out<<"Color: "<<r.color<<"Vértices:"<<std::endl<<"v0 = "<<r.vs[0]<<std::endl<<"v1 = "<<r.vs[1]<<std::endl<<"v2 = "<<r.vs[2]<<std::endl<<"v3 = "<<r.vs[3];
+	out<<"Color: "<<r.color<<std::endl<<"Vértices:"<<std::endl<<"v0 = "<<r.vs[0]<<std::endl<<"v1 = "<<r.vs[1]<<std::endl<<"v2 = "<<r.vs[2]<<std::endl<<"v3 = "<<r.vs[3];
 	return out;
 }
              
@@ -110,6 +119,6 @@ void Rectangle::translate(double incX, double incY){
 }
 
 void Rectangle::print(){
-	std::cout<<"Color: "<<color<<"Vértices:"<<std::endl<<"v0 = "<<vs[0]<<std::endl<<"v1 = "<<vs[1]<<std::endl<<"v2 = "<<vs[2]<<std::endl<<"v3 = "<<vs[3];
+	std::cout<<"Color: "<<color<<std::endl<<"Vértices:"<<std::endl<<"v0 = "<<vs[0]<<std::endl<<"v1 = "<<vs[1]<<std::endl<<"v2 = "<<vs[2]<<std::endl<<"v3 = "<<vs[3];
 }
 
