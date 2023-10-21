@@ -5,7 +5,7 @@ Circle::Circle(){
 	radius = 1;
 	center.x = 0;
 	center.y = 0;
-	color;
+	color = "red";
 
 }
 
@@ -35,7 +35,7 @@ void Circle::set_radius(double r){
 }
 
 std::ostream& operator<<(std::ostream &out, const Circle &c){
-	out<<"Los datos del circulo son:"<<std::endl<<"Color: "<<c.color<<std::endl<<"Radio: "<<c.radius<<std::endl<<"Centro: ("<<c.center<<")"<<std::endl;
+	out<<"Los datos del circulo son:"<<std::endl<<"Color: "<<c.color<<std::endl<<"Radio: "<<c.radius<<std::endl<<"Centro: "<<c.center;
 	return out;
 }
 
@@ -46,7 +46,7 @@ double Circle::area(){
 	return area;
 }
 
-double Circle::perimeter(){
+double Circle::perimeter() {
 	double pi =  M_PI;
 	double perimeter = 2*pi*radius; 
 	return perimeter;
