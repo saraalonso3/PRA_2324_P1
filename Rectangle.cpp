@@ -1,5 +1,5 @@
 #include "Rectangle.h"
-#include "Point2D.h"
+
 
 bool Rectangle::check(Point2D* vertices){
 	double d1, d2, d3, d4;
@@ -40,11 +40,15 @@ Rectangle::Rectangle(std::string color, Point2D* vertices){
 }
 
 Rectangle::Rectangle(const Rectangle &r){
-	color = r.color;
-	Point2D* v = new Point2D[4];
-	for (int i = 0; i < N_VERTICES; i++){
-		v[i] = r.vs[i];
+	if (vs != nullptr) {
+    		delete[] vs;
 	}
+	color = r.color;
+	vs = new Point2D[N_VERTICES];
+	for (int i = 0; i < N_VERTICES; i++){
+		vs[i] = r.vs[i];
+	}
+
 }
 
 Rectangle::~Rectangle(){
@@ -77,10 +81,11 @@ Point2D Rectangle::operator[](int ind) {
 }
 
 Rectangle& Rectangle::operator=(const Rectangle &r){
+	delete[] vs;
 	color = r.color;
-        Point2D* v = new Point2D[4];
+        vs = new Point2D[N_VERTICES];
         for (int i = 0; i < N_VERTICES; i++){
-                v[i] = r.vs[i];
+                vs[i] = r.vs[i];
         }
 	return *this;
 }
