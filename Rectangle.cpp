@@ -19,14 +19,16 @@ bool Rectangle::check(Point2D* vertices){
 
 Rectangle::Rectangle(){
 	color = "red";
-	vs[0] = (-1,0.5);
-	vs[1] = (1,0.5);
-	vs[2] = (1,-0.5);
-	vs[3] = (-1,-0.5);
+	vs = new Point2D[N_VERTICES];
+	vs[0] = Point2D(-1,0.5);
+	vs[1] = Point2D(1, 0.5);
+	vs[2] = Point2D(1,-0.5);
+	vs[3] = Point2D(-1,-0.5);
 }
 
 Rectangle::Rectangle(std::string color, Point2D* vertices){
 	this->color = color;
+	vs = new Point2D[N_VERTICES];
 	bool correcto = check(vertices);
 	if(correcto == true){
 	vs[0]= vertices[0];
@@ -40,9 +42,6 @@ Rectangle::Rectangle(std::string color, Point2D* vertices){
 }
 
 Rectangle::Rectangle(const Rectangle &r){
-	if (vs != nullptr) {
-    		delete[] vs;
-	}
 	color = r.color;
 	vs = new Point2D[N_VERTICES];
 	for (int i = 0; i < N_VERTICES; i++){
@@ -98,8 +97,7 @@ std::ostream& operator<<(std::ostream &out, const Rectangle &r){
 		
 double Rectangle::area(){
 	double area, d1, d2; 
-	
-	d1 = vs->distance(vs[1], vs[0]);
+	d1 = vs->distance(vs[0], vs[1]);  // Accede a las coordenadas usando el operador de punto (.)
 	d2 = vs->distance(vs[1], vs[2]);
 	area = d1 * d2;
 	
@@ -108,9 +106,8 @@ double Rectangle::area(){
 
 double Rectangle::perimeter(){
 	double perimeter, d1, d2;
-	
-	d1 = vs->distance(vs[1], vs[0]);
-        d2 = vs->distance(vs[1], vs[2]);
+	d1 = vs->distance(vs[0], vs[1]);  // Accede a las coordenadas usando el operador de punto (.)
+        d2 = vs->distance(vs[1], vs[2]);	
         perimeter = 2*d1 + 2*d2;
 
 	return perimeter;
