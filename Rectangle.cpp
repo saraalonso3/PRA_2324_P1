@@ -97,7 +97,7 @@ std::ostream& operator<<(std::ostream &out, const Rectangle &r){
 		
 double Rectangle::area(){
 	double area, d1, d2; 
-	d1 = vs->distance(vs[0], vs[1]);  // Accede a las coordenadas usando el operador de punto (.)
+	d1 = vs->distance(vs[0], vs[1]);  
 	d2 = vs->distance(vs[1], vs[2]);
 	area = d1 * d2;
 	
@@ -106,7 +106,7 @@ double Rectangle::area(){
 
 double Rectangle::perimeter(){
 	double perimeter, d1, d2;
-	d1 = vs->distance(vs[0], vs[1]);  // Accede a las coordenadas usando el operador de punto (.)
+	d1 = vs->distance(vs[0], vs[1]);  
         d2 = vs->distance(vs[1], vs[2]);	
         perimeter = 2*d1 + 2*d2;
 
