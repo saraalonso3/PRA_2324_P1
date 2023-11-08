@@ -17,7 +17,7 @@ bool Square::check(Point2D* vertices){
 }
 
 Square::Square(){
-	vs = new Point2D[N_VERTICES];
+	vs = new Point2D[4];
 	color = "red";
 	vs[0] = Point2D(-1,1);
 	vs[1] = Point2D(1,1);
@@ -27,7 +27,7 @@ Square::Square(){
 
 Square::Square(std::string color, Point2D* vertices){
 	this->color = color;
-	vs = new Point2D(N_VERTICES);
+	vs = new Point2D[N_VERTICES];
 	bool cuadrado = check(vertices);
 	
 	if(cuadrado == true){
@@ -37,8 +37,9 @@ Square::Square(std::string color, Point2D* vertices){
 		vs[3]= vertices[3];
 	}
 	else{
-		throw std::invalid_argument("Los vértices no forman un cuadrado");
+		throw std::invalid_argument("Estos vértices no forman un cuadrado");
 	}
+	
 }
 
 void Square::set_vertices(Point2D* vertices){
